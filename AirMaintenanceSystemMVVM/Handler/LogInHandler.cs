@@ -19,6 +19,7 @@ namespace AirMaintenanceSystemMVVM.Handler
         public PersistencyFadace Persistency { get; set; }
         public LogInHandler(LogInViewM logInViewM)
         {
+            
             LogInViewM = logInViewM;
             Persistency = new PersistencyFadace();
         }
