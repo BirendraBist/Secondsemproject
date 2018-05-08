@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="AirMaintenanceSystemMVVM.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AirMaintenanceSystemMVVM"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ViewModel="using:AirMaintenanceSystemMVVM.ViewModel"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.DataContext>
+            <ViewModel:LogInViewM/>
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="550"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Text="User Name" Height="50"  TextAlignment="Center" FontWeight="Medium" FontSize="30"/>
+            <TextBox Text="{Binding NewUser.User_Email, Mode=TwoWay}" Height="50" Width="350" Margin="15,0,0,0" FontSize="25"  VerticalContentAlignment="Center" PlaceholderText="Example@Something.com"/>
+
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Text="Password" Height="50"  TextAlignment="Center" FontWeight="Medium" FontSize="30"/>
+            <PasswordBox Password="{Binding NewUser.User_Password,Mode=TwoWay}" Height="50" Width="350" Margin="35,0,0,0" FontSize="25" VerticalContentAlignment="Center" HorizontalAlignment="Right" PlaceholderText="Password"/>
+        </StackPanel>
+        <Button Command="{Binding CheckCommand}" Grid.Row="3" Grid.Column="1" Content="LogIn" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Medium" FontSize="20" Height="55" Width="100"/>
+
+
+
+    </Grid>
+</Page>
