@@ -15,7 +15,7 @@ namespace AirMaintenanceSystemMVVM.Persistency
 {
     public class PersistencyFadace
     {
-        const string ServerUrl = "http://localhost:63341/";
+        const string ServerUrl = "http://localhost:50107/";
         HttpClientHandler handler;
         public PersistencyFadace()
         {
@@ -71,6 +71,32 @@ namespace AirMaintenanceSystemMVVM.Persistency
                 return null;
 
             }
+        }
+
+        public List<Station> GetStaions()
+        {
+            using (var client = new HttpClient(handler))
+            {
+                client.BaseAddress = new Uri(ServerUrl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                try
+                {
+                    var response = client.GetAsync("api/Stations").Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var stationlist = response.Content.ReadAsAsync<IEnumerable<Station>>().Result;
+                        return stationlist.ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    new MessageDialog(ex.Message).ShowAsync();
+                }
+                return null;
+
+            }
+
         }
     }
 }

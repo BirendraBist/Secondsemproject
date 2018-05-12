@@ -5,9 +5,45 @@
     xmlns:local="using:AirMaintenanceSystemMVVM.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:AirMaintenanceSystemMVVM.ViewModel"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBox Text="Anina"/>
-    </Grid>
+        <Grid.DataContext>
+            <viewModel:StationViewModel/>
+        </Grid.DataContext>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="130"/>
+            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        <ListView Background="Blue" Grid.Column="1" Grid.Row="1" Grid.RowSpan="5">
+                
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="ID" FontWeight="Bold" FontSize="19" Foreground="Black"/>
+                            <TextBlock Text="Name" FontWeight="Bold" FontSize="19" Foreground="Black" />
+
+                        </StackPanel>
+                        <StackPanel  Margin="12,0,0,0">
+                            <TextBlock Text="{Binding StationID}"  FontWeight="Bold" FontSize="19" Foreground="Black"/>
+                            <TextBlock Text="{Binding StationName}"  FontWeight="Bold" FontSize="19" Foreground="Black" />
+
+                        </StackPanel>
+                    </StackPanel>
+                
+            </ListView>
+        
+           </Grid>
 </Page>

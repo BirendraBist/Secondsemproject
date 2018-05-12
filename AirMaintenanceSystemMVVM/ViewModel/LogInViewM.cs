@@ -30,7 +30,7 @@ namespace AirMaintenanceSystemMVVM.ViewModel
 
         //property 
         private int _userId;
-        public int User_ID
+        public int UserID
         {
             get { return _userId; }
             set
@@ -42,7 +42,7 @@ namespace AirMaintenanceSystemMVVM.ViewModel
 
         private int _userName;
 
-        public int User_Name
+        public int UserName
         {
             get { return _userName; }
             set
@@ -53,7 +53,7 @@ namespace AirMaintenanceSystemMVVM.ViewModel
         }
 
         private int _userEmail;
-        public int User_Email
+        public int UserEmail
         {
             get { return _userEmail; }
             set
@@ -63,7 +63,7 @@ namespace AirMaintenanceSystemMVVM.ViewModel
             }
         }
         private int _userPassword;
-        public int User_Password
+        public int UserPassword
         {
             get { return _userPassword; }
             set
@@ -75,7 +75,7 @@ namespace AirMaintenanceSystemMVVM.ViewModel
 
         private int _userType;
         
-        public int User_Type
+        public int UserType
         {
             get { return _userType; }
             set
