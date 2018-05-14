@@ -20,9 +20,9 @@ namespace AirMaintenanceSystemMVVM.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class StationForTechnician : Page
+    public sealed partial class MonitorView : Page
     {
-        public StationForTechnician()
+        public MonitorView()
         {
             this.InitializeComponent();
         }

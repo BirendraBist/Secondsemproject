@@ -98,6 +98,31 @@ namespace AirMaintenanceSystemMVVM.Persistency
             }
 
         }
+        public List<Monitor> GetMonitors()
+        {
+            using (var client = new HttpClient(handler))
+            {
+                client.BaseAddress = new Uri(ServerUrl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                try
+                {
+                    var response = client.GetAsync("api/Monitors").Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var monitorlist = response.Content.ReadAsAsync<IEnumerable<Monitor>>().Result;
+                        return monitorlist.ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    new MessageDialog(ex.Message).ShowAsync();
+                }
+                return null;
+
+            }
+
+        }
     }
 }
 

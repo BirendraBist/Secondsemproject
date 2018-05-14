@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using  AirMaintenanceSystemMVVM.View;
 
 namespace AirMaintenanceSystemMVVM.Model
 {
-   public class Station
+    public class Station
     {
         public int Station_ID { get; set; }
         public string Station_Name { get; set; }
 
-        public Station(int stationid,string stationname)
+        public Station(int station_id,string station_name)
         {
-            Station_ID = stationid;
-            Station_Name = stationname;
+            Station_ID = station_id;
+            Station_Name = station_name;
 
         }
 
@@ -25,7 +26,7 @@ namespace AirMaintenanceSystemMVVM.Model
 
         public override string ToString()
         {
-            return "";
+            return $"{nameof(Station_ID)}:{Station_ID},{nameof(Station_Name)}:{Station_Name}";
         }
     }
 }

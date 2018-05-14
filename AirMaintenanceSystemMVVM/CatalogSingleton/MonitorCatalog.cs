@@ -9,37 +9,29 @@ using System.Threading.Tasks;
 using AirMaintenanceSystemMVVM.Model;
 using AirMaintenanceSystemMVVM.Persistency;
 
+
 namespace AirMaintenanceSystemMVVM.CatalogSingleton
 {
-   public  class StationCatalog:INotifyPropertyChanged
+    public class MonitorCatalog : INotifyPropertyChanged
     {
-        public static StationCatalog Instance { get; } = new StationCatalog();
+        public static MonitorCatalog Instance { get; } = new MonitorCatalog();
 
-        private ObservableCollection<Station> _stations;
+        private ObservableCollection<Monitor> _monitors;
 
-        public ObservableCollection<Station> Stations
+        public ObservableCollection<Monitor> Monitors
         {
-            get { return _stations; }
+            get { return _monitors; }
             set
             {
-                _stations = value;
+                _monitors = value;
                 OnPropertyChanged();
             }
         }
 
-        private StationCatalog()
+        public MonitorCatalog()
         {
-            Stations = new ObservableCollection<Station>();
-           // Station s1= new Station(1234,"Roskilde");
-           // Stations.Add(s1);
-            Stations= new ObservableCollection<Station>(new PersistencyFadace().GetStaions());
-
-        }
-
-
-        public void Add(int Station_ID, string Station_Name)
-        {
-            Stations.Add(new Station(Station_ID, Station_Name));
+            Monitors=new ObservableCollection<Monitor>();
+            Monitors= new ObservableCollection<Monitor>(new PersistencyFadace().GetMonitors());
         }
 
 
@@ -48,5 +40,6 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

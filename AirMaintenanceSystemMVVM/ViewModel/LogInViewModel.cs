@@ -11,7 +11,7 @@ using AirMaintenanceSystemMVVM.Common;
 
 namespace AirMaintenanceSystemMVVM.ViewModel
 {
-     public class LogInViewM : INotifyPropertyChanged
+     public class LogInViewModel : INotifyPropertyChanged
     {
         
         public Handler.LogInHandler LogInHandler { get; set; }
@@ -85,7 +85,7 @@ namespace AirMaintenanceSystemMVVM.ViewModel
             }
         }
 
-        public LogInViewM()
+        public LogInViewModel()
         {
             LogInHandler = new Handler.LogInHandler(this);
             NewUser = new User();
