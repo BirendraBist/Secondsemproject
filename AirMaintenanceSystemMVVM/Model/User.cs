@@ -15,12 +15,12 @@ namespace AirMaintenanceSystemMVVM.Model
         public string User_Password { get; set; }
         public string User_Type { get; set; }
 
-        public User(int userid,string username, string useremail,string userpassword,string usertype)
+        public User(int user_id,string user_name, string user_email,string user_password,string user_type)
         {
-            User_Id = userid;
-            User_Name = username;
-            User_Email = useremail;
-            User_Type = usertype;
+            User_Id = user_id;
+            User_Name = user_name;
+            User_Email = user_email;
+            User_Type = user_type;
         }
         public User()
         {

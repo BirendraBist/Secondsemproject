@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AirMaintenanceSystemMVVM.Model;
 using AirMaintenanceSystemMVVM.Persistency;
+using AirMaintenanceSystemMVVM.ViewModel;
 
 
 namespace AirMaintenanceSystemMVVM.CatalogSingleton
@@ -15,6 +16,8 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
     public class MonitorCatalog : INotifyPropertyChanged
     {
         public static MonitorCatalog Instance { get; } = new MonitorCatalog();
+
+        public StationViewModel  svm;
 
         private ObservableCollection<Monitor> _monitors;
 
@@ -30,8 +33,10 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
 
         public MonitorCatalog()
         {
-            Monitors=new ObservableCollection<Monitor>();
-            Monitors= new ObservableCollection<Monitor>(new PersistencyFadace().GetMonitors());
+            svm = new StationViewModel();
+            Monitors =new ObservableCollection<Monitor>();
+            //int myint = svm.SelectedStation.Station_ID;
+            //Monitors= new ObservableCollection<Monitor>(new PersistencyFadace().GetMonitors());
         }
 
 

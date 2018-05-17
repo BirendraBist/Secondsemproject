@@ -16,11 +16,18 @@ namespace AirMaintenanceSystemMVVM.ViewModel
 {
     public class StationViewModel : INotifyPropertyChanged
     {
+        private Station _selectedStation;
+
         public StationCatalog StationCatalog { get; set; }
+        public MonitorCatalog MonitorCatalog { get; set; }
+
+
+        private ObservableCollection<Monitor> monitors= new ObservableCollection<Monitor>(); 
+       
 
              //property
         private int _stationID;
-        public int StationID
+        public int Station_ID
         {
             get { return _stationID; }
             set
@@ -32,7 +39,7 @@ namespace AirMaintenanceSystemMVVM.ViewModel
 
         private string _stationName;
 
-        public string StationName
+        public string Station_Name
         {
             get { return _stationName; }
             set
@@ -43,43 +50,39 @@ namespace AirMaintenanceSystemMVVM.ViewModel
         }
        
        
-        public Station station_ID { get; set; }
-      //  public static  int SelectedStationIndex { get; set; }
+        //public Station station_ID { get; set; }
+       
         public StationViewModel()
         {
-            StationCatalog = StationCatalog.Instance;
-            station_ID = new Station();
-            NewStation= new Station();
+         monitors=new ObservableCollection<Monitor>();
+           StationCatalog = StationCatalog.Instance;
+            MonitorCatalog= MonitorCatalog.Instance;
+            SelectedStation=new Station();
+
             
-           // SelectedStationIndex = -1;
         }
-        private Station _newStation;
-        private Station _selectedEventIndex;
+       
 
-        public Station NewStation
+         
+        public Station SelectedStation
         {
-            get { return _newStation; }
-            set {
-                _newStation = value;
-                OnPropertyChanged();
-               }
-        }
-
-         private ObservableCollection<Station> _selectedListView;
-
-        public ObservableCollection<Station> SelectedListView
-        {
-            get { return this._selectedListView; }
+            get { return _selectedStation; }
             set
             {
-                _selectedListView = value;
-                OnPropertyChanged(nameof(SelectedListView));
+                _selectedStation = value;
+                Monitors = (new PersistencyFadace().GetMonitors(SelectedStation.Station_ID));
+                OnPropertyChanged(nameof(SelectedStation));
             }
         }
-        public Station SelectedEventIndex
+
+        public ObservableCollection<Monitor> Monitors
         {
-            get { return _selectedEventIndex; }
-            set { _selectedEventIndex = value; OnPropertyChanged(nameof(SelectedEventIndex)); }
+            get { return monitors; }
+            set
+            {
+                monitors= value;
+                  OnPropertyChanged(nameof(Monitors));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

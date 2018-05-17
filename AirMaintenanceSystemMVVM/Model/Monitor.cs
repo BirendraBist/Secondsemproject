@@ -8,7 +8,7 @@ namespace AirMaintenanceSystemMVVM.Model
 {
     public class Monitor
     {
-        public int Motinor_ID { get; set; }
+        public int Monitor_ID { get; set; }
         public string Monitor_Name { get; set; }
         public string Monitor_Type { get; set;  }
 
@@ -16,7 +16,7 @@ namespace AirMaintenanceSystemMVVM.Model
 
         public Monitor(int monitor_id, string monitor_name,string monitor_type,int station_id)
         {
-            Motinor_ID = monitor_id;
+            Monitor_ID = monitor_id;
             Monitor_Name = monitor_name;
             Monitor_Type = monitor_type;
             Station_ID = station_id;
@@ -31,7 +31,7 @@ namespace AirMaintenanceSystemMVVM.Model
         public override string ToString()
         {
             return
-                $"{nameof(Motinor_ID)}:{Motinor_ID},{nameof(Monitor_Name)}:{Monitor_Name},{nameof(Monitor_Type)}:{Monitor_Type},{nameof(Station_ID)}:{Station_ID}";
+                $"{nameof(Monitor_ID)}:{Monitor_ID},{nameof(Monitor_Name)}:{Monitor_Name},{nameof(Monitor_Type)}:{Monitor_Type},{nameof(Station_ID)}:{Station_ID}";
         }
     }
 

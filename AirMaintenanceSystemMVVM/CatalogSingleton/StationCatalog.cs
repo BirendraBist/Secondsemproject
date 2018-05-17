@@ -37,10 +37,10 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
         }
 
 
-        public void Add(int Station_ID, string Station_Name)
-        {
-            Stations.Add(new Station(Station_ID, Station_Name));
-        }
+        //public void Add(int Station_ID, string Station_Name)
+        //{
+        //    Stations.Add(new Station(Station_ID, Station_Name));
+        //}
 
 
         public event PropertyChangedEventHandler PropertyChanged;
