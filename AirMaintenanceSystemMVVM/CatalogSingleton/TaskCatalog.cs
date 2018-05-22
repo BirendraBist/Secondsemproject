@@ -17,7 +17,7 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
         public static TaskCatalog Instance { get; }= new TaskCatalog();
         private ObservableCollection<Task> _tasks;
 
-        public ObservableCollection<Task> Tasks
+        public ObservableCollection<Task>Tasks
         {
             get { return _tasks; }
             set
@@ -31,9 +31,6 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
         private TaskCatalog()
         {
             Tasks= new ObservableCollection<Task>();
-            Tasks = new ObservableCollection<Task>(new PersistencyFadace().GetTasks());
-
-
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

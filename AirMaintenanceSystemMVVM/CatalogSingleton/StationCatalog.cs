@@ -32,7 +32,7 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
             Stations = new ObservableCollection<Station>();
            // Station s1= new Station(1234,"Roskilde");
            // Stations.Add(s1);
-            Stations= new ObservableCollection<Station>(new PersistencyFadace().GetStaions());
+            Stations= new ObservableCollection<Station>(new PersistencyFadace().GetStations());
 
         }
 

@@ -22,13 +22,11 @@
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="300"/>
-            
+            <ColumnDefinition Width="*"/>
+
         </Grid.ColumnDefinitions>
-        <ListView x:Name="listView" Background="Blue" Grid.Column="1" Grid.Row="1" Grid.RowSpan="5" 
+        <ListView x:Name="listView" Background="Blue" Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" 
                   ItemsSource="{Binding StationCatalog.Stations}" 
                    SelectedItem="{Binding SelectedStation, Mode=TwoWay}" >
             <ListView.ItemTemplate>
@@ -49,35 +47,9 @@
             </ListView.ItemTemplate>
 
         </ListView>
-        <!--<Button Grid.Column="2" Grid.Row="5" Height="80" Width="200" Content="Select" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="ButtonBase_OnClick"/>-->
-
-        <ListView x:Name="listView2" Background="red" Grid.Column="3" Grid.Row="1" Grid.RowSpan="5"
-                  ItemsSource="{Binding Monitors}"  >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="ID" FontWeight="Bold" FontSize="19" Foreground="Black"/>
-                            <TextBlock Text="Name" FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="Type" FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="Station ID" FontWeight="Bold" FontSize="19" Foreground="Black" />
-
-
-                        </StackPanel>
-                        <StackPanel  Margin="12,0,0,0">
-                            <TextBlock Text="{Binding Monitor_ID}"  FontWeight="Bold" FontSize="19" Foreground="Black"/>
-                            <TextBlock Text="{Binding Monitor_Name}"   FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="{Binding Monitor_Type}"   FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="{Binding Station_ID}"   FontWeight="Bold" FontSize="19" Foreground="Black" />
-
-
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-
-
-        </ListView>
-
+        <Button Grid.Column="1" Grid.Row="5" Height="60" Width="150" Content="Select"
+                HorizontalAlignment="Left" VerticalAlignment="Bottom"  Click="ButtonBase_OnClick"/>
+        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right"
+                VerticalAlignment="Top" Height="60" Width="90" Content="LogOut" Margin="0,0,20,0" Click="Button_Click" />
     </Grid>
 </Page>

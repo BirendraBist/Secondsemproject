@@ -17,9 +17,7 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
     {
         public static MonitorCatalog Instance { get; } = new MonitorCatalog();
 
-        public StationViewModel  svm;
-
-        private ObservableCollection<Monitor> _monitors;
+       private ObservableCollection<Monitor> _monitors;
 
         public ObservableCollection<Monitor> Monitors
         {
@@ -31,14 +29,16 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
             }
         }
 
-        public MonitorCatalog()
+        private MonitorCatalog()
         {
-            svm = new StationViewModel();
             Monitors =new ObservableCollection<Monitor>();
-            //int myint = svm.SelectedStation.Station_ID;
-            //Monitors= new ObservableCollection<Monitor>(new PersistencyFadace().GetMonitors());
+           // Monitors= new ObservableCollection<Monitor>(new PersistencyFadace().GetMonitors());
         }
 
+        public void getRightMonitors(int id)
+        {
+           Monitors= new PersistencyFadace().GetMonitors(id);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -101,6 +101,7 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Handler\LogInHandler.cs" />
     <Compile Include="Model\Monitor.cs" />
+    <Compile Include="Model\MonitorTask.cs" />
     <Compile Include="Model\Station.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\User.cs" />
@@ -109,8 +110,8 @@
     <Compile Include="ViewModel\MonitorViewModel.cs" />
     <Compile Include="ViewModel\StationViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
-    <Compile Include="View\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="View\LogInView.xaml.cs">
+      <DependentUpon>LogInView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\MonitorView.xaml.cs">
@@ -127,6 +128,7 @@
     <None Include="AirMaintenanceSystemMVVM_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Air.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -141,7 +143,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\MainPage.xaml">
+    <Page Include="View\LogInView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

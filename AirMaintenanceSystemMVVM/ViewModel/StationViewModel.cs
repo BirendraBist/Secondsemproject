@@ -19,11 +19,10 @@ namespace AirMaintenanceSystemMVVM.ViewModel
         private Station _selectedStation;
 
         public StationCatalog StationCatalog { get; set; }
-        public MonitorCatalog MonitorCatalog { get; set; }
+        //public MonitorCatalog MonitorCatalog { get; set; }
 
-
-        private ObservableCollection<Monitor> monitors= new ObservableCollection<Monitor>(); 
-       
+        //private ObservableCollection<Monitor> monitors= new ObservableCollection<Monitor>(); 
+        private MonitorCatalog mc;
 
              //property
         private int _stationID;
@@ -48,42 +47,36 @@ namespace AirMaintenanceSystemMVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-       
-       
-        //public Station station_ID { get; set; }
-       
-        public StationViewModel()
+      public StationViewModel()
         {
-         monitors=new ObservableCollection<Monitor>();
+         //monitors=new ObservableCollection<Monitor>();
            StationCatalog = StationCatalog.Instance;
-            MonitorCatalog= MonitorCatalog.Instance;
+           mc= MonitorCatalog.Instance;
             SelectedStation=new Station();
-
-            
-        }
+      }
        
-
-         
         public Station SelectedStation
         {
             get { return _selectedStation; }
             set
             {
                 _selectedStation = value;
-                Monitors = (new PersistencyFadace().GetMonitors(SelectedStation.Station_ID));
+               
+                mc.getRightMonitors(SelectedStation.Station_ID);
+               // Monitors = (new PersistencyFadace().GetMonitors(SelectedStation.Station_ID));
                 OnPropertyChanged(nameof(SelectedStation));
             }
         }
 
-        public ObservableCollection<Monitor> Monitors
-        {
-            get { return monitors; }
-            set
-            {
-                monitors= value;
-                  OnPropertyChanged(nameof(Monitors));
-            }
-        }
+        //public ObservableCollection<Monitor> Monitors
+        //{
+        //    get { return monitors; }
+        //    set
+        //    {
+        //        monitors = value;
+        //        OnPropertyChanged(nameof(Monitors));
+        //    }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

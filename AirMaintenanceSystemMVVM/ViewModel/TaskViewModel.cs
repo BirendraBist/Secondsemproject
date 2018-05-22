@@ -15,81 +15,75 @@ namespace AirMaintenanceSystemMVVM.ViewModel
 {
     public class TaskViewModel:INotifyPropertyChanged
     {
-        public TaskCatalog TaskCatalog { get; set; }
+        //public TaskCatalog TaskCatalog { get; set; }
 
 
-        //property
-        private int _taskID;
-        public int TaskID
-        {
-            get { return _taskID; }
-            set
-            {
-                _taskID = value;
-                OnPropertyChanged();
-            }
-        }
+        ////property
+        //private int _taskID;
+        //public int Task_ID
+        //{
+        //    get { return _taskID; }
+        //    set
+        //    {
+        //        _taskID = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-        private string _taskDescirption;
+        //private string _taskDescirption;
 
-        public string TaskDescirption
-        {
-            get { return _taskDescirption; }
-            set
-            {
-                _taskDescirption = value;
-                OnPropertyChanged();
-            }
-        }
+        //public string Task_Descirption
+        //{
+        //    get { return _taskDescirption; }
+        //    set
+        //    {
+        //        _taskDescirption = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
-        private string _taskSchedule;
+        //private string _taskSchedule;
 
-        public string TaskSchedule
-        {
-            get { return _taskSchedule; }
-            set
-            {
-                _taskSchedule = value;
-                OnPropertyChanged();
-            }
+        //public string Task_Schedule
+        //{
+        //    get { return _taskSchedule; }
+        //    set
+        //    {
+        //        _taskSchedule = value;
+        //        OnPropertyChanged();
+        //    }
 
-        }
-        private string _taskType;
+        //}
+        //private string _taskType;
 
-        public string TaskType
-        {
-            get { return _taskType; }
-            set
-            {
-                _taskType = value;
-                OnPropertyChanged();
-            }
+        //public string Task_Type
+        //{
+        //    get { return _taskType; }
+        //    set
+        //    {
+        //        _taskType = value;
+        //        OnPropertyChanged();
+        //    }
 
-        }
-        private string _taskStatus;
+        //}
+        //private string _taskStatus;
 
-        public string TaskStatus
-        {
-            get { return _taskStatus; }
-            set
-            {
-                _taskStatus = value;
-                OnPropertyChanged();
-            }
+        //public string Task_Status
+        //{
+        //    get { return _taskStatus; }
+        //    set
+        //    {
+        //        _taskStatus = value;
+        //        OnPropertyChanged();
+        //    }
 
-        }
-
-
-
-        public Station task_ID { get; set; }
+        //}
         
-        public TaskViewModel()
-        {
-            TaskCatalog = TaskCatalog.Instance;
+        //public TaskViewModel()
+        //{
+        //    TaskCatalog = TaskCatalog.Instance;
             
-        }
-        
-
+        //}
        
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

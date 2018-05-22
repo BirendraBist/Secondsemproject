@@ -17,8 +17,8 @@ namespace AirMaintenanceSystemMVVM.Persistency
 {
     public class PersistencyFadace
     {
-
-        public ObservableCollection<Monitor> om= new ObservableCollection<Monitor>();
+        
+       
         const string ServerUrl = "http://localhost:50107/";
         HttpClientHandler handler;
 
@@ -55,6 +55,8 @@ namespace AirMaintenanceSystemMVVM.Persistency
             }
         }
 
+        
+
         public List<User> GetLogin()
         {
             using (var client = new HttpClient(handler))
@@ -75,13 +77,11 @@ namespace AirMaintenanceSystemMVVM.Persistency
                 {
                     new MessageDialog(ex.Message).ShowAsync();
                 }
-
                 return null;
-
             }
         }
-
-        public List<Station> GetStaions()
+        
+        public List<Station> GetStations()
         {
             using (var client = new HttpClient(handler))
             {
@@ -107,8 +107,9 @@ namespace AirMaintenanceSystemMVVM.Persistency
             }
 
         }
-
+        public ObservableCollection<Monitor> om = new ObservableCollection<Monitor>();
         public ObservableCollection<Monitor> GetMonitors(int id)
+
         {
             
             using (var client = new HttpClient(handler))
@@ -128,12 +129,38 @@ namespace AirMaintenanceSystemMVVM.Persistency
                            if(m.Station_ID==id) 
                                om.Add(m);
                         }
-                        //var rightMonitors = from m in monitorlist where m.Station_ID == id select m;
-
                         return om;
-                        //rightMonitors;
-                        //return new ObservableCollection<Monitor>(monitorlist.ToList());
-                        //monitorlist.ToList();
+                      }
+                }
+                catch (Exception ex)
+                {
+                    new MessageDialog(ex.Message).ShowAsync();
+                }
+                return null;
+                }
+            }
+
+        public ObservableCollection<int> omt = new ObservableCollection<int>();
+        public ObservableCollection<Task> GetMonitorsTasks(int id)
+        {
+            using (var client = new HttpClient(handler))
+            {
+                client.BaseAddress = new Uri(ServerUrl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                try
+                {
+                    var response = client.GetAsync("api/MonitorTasks").Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var monitorlist = response.Content.ReadAsAsync<IEnumerable<MonitorTask>>().Result;
+
+                        foreach (var u in monitorlist)
+                        {
+                            if (u.Monitor_ID == id)
+                            omt.Add(u.Task_ID);
+                        }
+                        return ot;
                     }
                 }
                 catch (Exception ex)
@@ -142,12 +169,11 @@ namespace AirMaintenanceSystemMVVM.Persistency
                 }
 
                 return null;
-
             }
-
         }
 
-        public List<Task> GetTasks()
+        public ObservableCollection<Task> ot = new ObservableCollection<Task>();
+        public ObservableCollection<Task> GetTasks()
         {
             using (var client = new HttpClient(handler))
             {
@@ -160,7 +186,17 @@ namespace AirMaintenanceSystemMVVM.Persistency
                     if (response.IsSuccessStatusCode)
                     {
                         var tasklist = response.Content.ReadAsAsync<IEnumerable<Task>>().Result;
-                        return tasklist.ToList();
+
+                        foreach (var u in tasklist)
+                        {
+                            foreach (var i in omt)
+                            {
+                                if (i == u.Task_ID)
+                                ot.Add(u);
+                            }
+                            
+                        }
+                        return ot;
                     }
                 }
                 catch (Exception ex)
@@ -169,7 +205,6 @@ namespace AirMaintenanceSystemMVVM.Persistency
                 }
 
                 return null;
-
             }
         }
     }
