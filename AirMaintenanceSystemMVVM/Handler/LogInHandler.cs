@@ -1,23 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using AirMaintenanceSystemMVVM.ViewModel;
 using AirMaintenanceSystemMVVM.Persistency;
 using AirMaintenanceSystemMVVM.View;
 using AirMaintenanceSystemMVVM.Model;
+using System.Windows.Input;
+using Windows.UI.Popups;
 
 
 namespace AirMaintenanceSystemMVVM.Handler
 {
     public class LogInHandler
     {
-        public LogInViewM LogInViewM { get; set; }
+        public LogInViewModel LogInViewM { get; set; }
         public PersistencyFadace Persistency { get; set; }
-        public LogInHandler(LogInViewM logInViewM)
+        public LogInHandler(LogInViewModel logInViewM)
         {
             
             LogInViewM = logInViewM;
@@ -42,20 +46,26 @@ namespace AirMaintenanceSystemMVVM.Handler
                             if (lu.User_Type == "Technician")
                             {
                                 var newFrame = new Frame();
-                                newFrame.Navigate(typeof(StationForTechnician));
+                                newFrame.Navigate(typeof(StationView));
                                 Window.Current.Content = newFrame;
                                 Windows.UI.Xaml.Window.Current.Activate();
                             }
-                            else if (lu.User_Type == "Researcher")
-                            {
-                                var newFrame = new Frame();
-                                newFrame.Navigate(typeof(StationForResearcher));
-                                Windows.UI.Xaml.Window.Current.Content = newFrame;
-                                Windows.UI.Xaml.Window.Current.Activate();
-                            }
+                            //else if (lu.User_Type == "Researcher")
+                            //{
+                            //    var newFrame = new Frame();
+                            //    newFrame.Navigate(typeof(StationForResearcher));
+                            //    Windows.UI.Xaml.Window.Current.Content = newFrame;
+                            //    Windows.UI.Xaml.Window.Current.Activate();
+                            //}
                         }
                     }
                 }
+                //else
+                {
+                  
+
+                }
+                
             }
         }
     }
