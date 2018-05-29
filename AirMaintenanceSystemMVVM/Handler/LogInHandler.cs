@@ -19,12 +19,12 @@ namespace AirMaintenanceSystemMVVM.Handler
 {
     public class LogInHandler
     {
-        public LogInViewModel LogInViewM { get; set; }
+        public LogInViewModel LogInViewModel { get; set; }
         public PersistencyFadace Persistency { get; set; }
         public LogInHandler(LogInViewModel logInViewM)
         {
             
-            LogInViewM = logInViewM;
+            LogInViewModel = logInViewM;
             Persistency = new PersistencyFadace();
         }
         public void AccountCheck()
@@ -34,11 +34,11 @@ namespace AirMaintenanceSystemMVVM.Handler
             foreach (var i in L)
             
             {
-                if (i.Equals(LogInViewM.NewUser.User_Email))
+                if (i.Equals(LogInViewModel.NewUser.User_Email))
                 {
                     {
-                        var lu = (User)LU.FirstOrDefault(x => x.User_Email == LogInViewM.NewUser.User_Email);
-                        if (lu.User_Password.Equals(LogInViewM.NewUser.User_Password))
+                        var lu = (User)LU.FirstOrDefault(x => x.User_Email == LogInViewModel.NewUser.User_Email);
+                        if (lu.User_Password.Equals(LogInViewModel.NewUser.User_Password))
                         {
 
 

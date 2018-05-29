@@ -31,5 +31,10 @@ namespace AirMaintenanceSystemMVVM.View
         {
             Frame.Navigate(typeof(MonitorView));
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(StationView));
+        }
     }
 }

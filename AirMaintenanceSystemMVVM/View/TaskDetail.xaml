@@ -5,26 +5,45 @@
     xmlns:local="using:AirMaintenanceSystemMVVM.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:AirMaintenanceSystemMVVM.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.DataContext>
+            <viewModel:MonitorViewModel/>
+        </Grid.DataContext>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="400"/>
+            <RowDefinition Height="300"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="130"/>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" />
-       <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
-       <Button Content="Not Done" Click="ButtonBase_OnClick" Height="50" Width="80"/>
-       <Button Content="Done" Margin="20,0,0,0" Height="50" Width="80"/>
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Margin="0,0,60,0" HorizontalAlignment="Right">
+            <TextBlock Text="Task ID" Margin="0,20,0,0" FontSize="20"/>
+            <TextBlock Text="Task Description" Margin="0,20,0,0" FontSize="20"/>
+            <TextBlock Text="Task Schedule" Margin="0,20,0,0" FontSize="20"/>
+            <TextBlock Text="Task Status" Margin="0,20,0,0" FontSize="20"/>
+            <TextBlock Text="Task Type" Margin="0,20,0,0" FontSize="20"/>
+
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Vertical">
+            <TextBlock Text="{Binding SelectedTask.Task_ID}" Margin="0,20,0,0" FontSize="20"/>
+            <TextBlock Text="{Binding SelectedTask.Task_Description}" Margin="0,20,0,0" FontSize="20"/>
+            <TextBlock Text="{Binding SelectedTask.Task_Schedule}" Margin="0,20,0,0" FontSize="20"/>
+            <TextBlock Text="{Binding SelectedTask.Task_Status}" Margin="0,20,0,0" FontSize="20"/>
+            <TextBlock Text="{Binding SelectedTask.Task_Type}" Margin="0,20,0,0" FontSize="20"/>
+
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Horizontal">
+       <Button Content="Not Done" Click="ButtonBase_OnClick" Height="50" Width="100" VerticalAlignment="Top"/>
+       <Button Content="Done" Margin="20,0,0,0" Height="50" Width="80" VerticalAlignment="Top"/>
 
         </StackPanel>
 

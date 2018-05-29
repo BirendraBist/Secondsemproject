@@ -6,10 +6,13 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using AirMaintenanceSystemMVVM.CatalogSingleton;
+using AirMaintenanceSystemMVVM.Handler;
 using AirMaintenanceSystemMVVM.Model;
 using AirMaintenanceSystemMVVM.Persistency;
 using Task = AirMaintenanceSystemMVVM.Model.Task;
+using AirMaintenanceSystemMVVM.Common;
 
 
 namespace AirMaintenanceSystemMVVM.ViewModel
@@ -56,7 +59,6 @@ namespace AirMaintenanceSystemMVVM.ViewModel
         }
         public TaskCatalog TaskCatalog { get; set; }
         private ObservableCollection<Task> tasks = new ObservableCollection<Task>();
-        private TaskCatalog tc;
         
         //property of Task
         private int _taskID;
@@ -107,6 +109,8 @@ namespace AirMaintenanceSystemMVVM.ViewModel
 
         }
         private string _taskStatus;
+        private static Task _selectedTask;
+
         public string Task_Status
         {
             get { return _taskStatus; }
@@ -122,11 +126,9 @@ namespace AirMaintenanceSystemMVVM.ViewModel
         {
             MonitorCatalog = MonitorCatalog.Instance;
             RightMonitors = new ObservableCollection<Monitor>();
-            tc = TaskCatalog.Instance;
             RightMonitors = MonitorCatalog.Monitors;
-           
-            //Tasks = new ObservableCollection<Task>();
-            
+            UpdateCommand = new RelayCommand(TaskHandler.UpdateTask);
+
         }
         
         public ObservableCollection<Monitor> RightMonitors
@@ -145,14 +147,22 @@ namespace AirMaintenanceSystemMVVM.ViewModel
             get { return _selectedMonitor; }
             set
             {
-                //tc.getSpecificTasks(SelectedMonitor.Monitor_ID);
+                
                 _selectedMonitor = value;
                 Tasks = new PersistencyFadace().GetMonitorsTasks(SelectedMonitor.Monitor_ID);
-               //Tasks=tc.GetSpecificTasks(SelectedMonitor.Monitor_ID); 
-                
-             //Tasks = (new PersistencyFadace().GetTasks(SelectedMonitor.Monitor_ID));
+               
                 OnPropertyChanged(nameof(SelectedMonitor));
             }
+        }
+
+        public static Task SelectedTask
+        {
+            get { return _selectedTask; }
+
+            set
+            {
+                _selectedTask = value;
+            } 
         }
         public ObservableCollection<Task> Tasks
         {
@@ -163,6 +173,9 @@ namespace AirMaintenanceSystemMVVM.ViewModel
                 OnPropertyChanged(nameof(Tasks));
             }
         }
+        //for update the tasklist
+        public Handler.TaskHandler TaskHandler { get; set; }
+        public ICommand UpdateCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

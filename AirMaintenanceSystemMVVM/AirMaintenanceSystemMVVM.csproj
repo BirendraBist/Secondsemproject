@@ -100,6 +100,7 @@
     <Compile Include="CatalogSingleton\TaskCatalog.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Handler\LogInHandler.cs" />
+    <Compile Include="Handler\TaskHandler.cs" />
     <Compile Include="Model\Monitor.cs" />
     <Compile Include="Model\MonitorTask.cs" />
     <Compile Include="Model\Station.cs" />

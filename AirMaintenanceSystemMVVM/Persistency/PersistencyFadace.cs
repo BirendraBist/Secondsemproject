@@ -204,8 +204,7 @@ namespace AirMaintenanceSystemMVVM.Persistency
                     if (response.IsSuccessStatusCode)
                     {
                         var tasklist = response.Content.ReadAsAsync<IEnumerable<Task>>().Result;
-                        //ObservableCollection<MonitorTask> m = GetMonitorsTasks(id);
-                        foreach (var i in tasklist)
+                       foreach (var i in tasklist)
                         {
                             if (omt.Contains(i.Task_ID))
                             {
@@ -225,73 +224,36 @@ namespace AirMaintenanceSystemMVVM.Persistency
             }
         }
 
-        
-        //public ObservableCollection<Task> GetRighTasks(int id)
-        //{
-        //    IEnumerable<MonitorTask> monitorlist = new List<MonitorTask>();
+        public void UpdateTask(Task TaskToUpdate)
+        {
+            using (var client = new HttpClient(handler))
+            {
+                client.BaseAddress = new Uri(ServerUrl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                try
+                {
+                   
+                    string jsonResidentToUpdate = JsonConvert.SerializeObject(TaskToUpdate);
 
-        //    using (var client = new HttpClient(handler))
-        //    {
-        //        client.BaseAddress = new Uri(ServerUrl);
-        //        client.DefaultRequestHeaders.Clear();
-        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //        try
-        //        {
-        //            var response = client.GetAsync("api/MonitorTasks").Result;
-        //            if (response.IsSuccessStatusCode)
-        //            {
-        //                monitorlist = response.Content.ReadAsAsync<IEnumerable<MonitorTask>>().Result.ToList();
+                    
+                    StringContent content = new StringContent(jsonResidentToUpdate, Encoding.UTF8, "Application/json");
 
-        //                foreach (var mm in monitorlist)
-        //                {
-        //                    if (mm.Monitor_ID == id)
-        //                    {
-        //                        ot.Add(mm.Task_ID);
-        //                    }
-                                                      
+                   
+                    var updateResponse = client.PutAsync("api/Tasks/" + TaskToUpdate.Name, content).Result;
+                    var result = updateResponse.StatusCode;
 
-        //                }
-                        
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            new MessageDialog(ex.Message).ShowAsync();
-        //        }
-
-        //        return ot; 
-        //    }
-        //}
-
-
-
-        //public  Task  GetSpecificTask(int id)
-        //{
-        //    Task task = new Task();
-        //            using (var client = new HttpClient(handler))
-        //            {
-        //                client.BaseAddress = new Uri(ServerUrl);
-        //                client.DefaultRequestHeaders.Clear();
-        //                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        //                try
-        //                {
-        //                    var response = client.GetStringAsync("api/Tasks/"+id).Result;
-        //                    task = JsonConvert.DeserializeObject<Task>(response);
-
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    new MessageDialog(ex.Message).ShowAsync();
-        //                }
-        //                return task;
-        //            }
-
-        //        }
+                    }
+                catch (Exception ex)
+                {
+                    new MessageDialog(ex.Message).ShowAsync();
+                }
+            }
+        }
 
 
     }
-   }
+}
         
     
 
