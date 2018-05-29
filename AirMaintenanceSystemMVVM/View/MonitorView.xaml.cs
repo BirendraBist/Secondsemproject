@@ -27,10 +27,10 @@ namespace AirMaintenanceSystemMVVM.View
             this.InitializeComponent();
         }
 
-        
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(StationView));
+            Frame.Navigate(typeof(TaskDetail));
         }
     }
 }

@@ -31,7 +31,13 @@ namespace AirMaintenanceSystemMVVM.CatalogSingleton
         private TaskCatalog()
         {
             Tasks= new ObservableCollection<Task>();
+           
         }
+        //public ObservableCollection<Task> GetSpecificTasks(int Mid)
+        //{
+        //   return  Tasks = new PersistencyFadace().GetRighTasks(Mid);
+        //}
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

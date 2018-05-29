@@ -8,7 +8,7 @@ using Windows.UI.Popups;
 using AirMaintenanceSystemMVVM.Model;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography.X509Certificates;
+using Windows.UI.Xaml.Controls;
 using Newtonsoft.Json;
 using Task = AirMaintenanceSystemMVVM.Model.Task;
 
@@ -17,15 +17,18 @@ namespace AirMaintenanceSystemMVVM.Persistency
 {
     public class PersistencyFadace
     {
-        
-       
-        const string ServerUrl = "http://localhost:50107/";
+
+
+        const string ServerUrl = "http://localhost:50618/";
         HttpClientHandler handler;
 
         public PersistencyFadace()
         {
             handler = new HttpClientHandler();
             handler.UseDefaultCredentials = true;
+            om = new ObservableCollection<Monitor>();
+            omt = new ObservableCollection<int>();
+
 
         }
 
@@ -55,8 +58,6 @@ namespace AirMaintenanceSystemMVVM.Persistency
             }
         }
 
-        
-
         public List<User> GetLogin()
         {
             using (var client = new HttpClient(handler))
@@ -77,10 +78,11 @@ namespace AirMaintenanceSystemMVVM.Persistency
                 {
                     new MessageDialog(ex.Message).ShowAsync();
                 }
+
                 return null;
             }
         }
-        
+
         public List<Station> GetStations()
         {
             using (var client = new HttpClient(handler))
@@ -107,11 +109,13 @@ namespace AirMaintenanceSystemMVVM.Persistency
             }
 
         }
-        public ObservableCollection<Monitor> om = new ObservableCollection<Monitor>();
+
+        public ObservableCollection<Monitor> om;
+
         public ObservableCollection<Monitor> GetMonitors(int id)
 
         {
-            
+
             using (var client = new HttpClient(handler))
             {
                 client.BaseAddress = new Uri(ServerUrl);
@@ -126,23 +130,29 @@ namespace AirMaintenanceSystemMVVM.Persistency
 
                         foreach (var m in monitorlist)
                         {
-                           if(m.Station_ID==id) 
-                               om.Add(m);
+                            if (m.Station_ID == id)
+                                om.Add(m);
                         }
+
                         return om;
-                      }
+                    }
                 }
                 catch (Exception ex)
                 {
                     new MessageDialog(ex.Message).ShowAsync();
                 }
-                return null;
-                }
-            }
 
-        public ObservableCollection<int> omt = new ObservableCollection<int>();
-        public ObservableCollection<Task> GetMonitorsTasks(int id)
+                return null;
+            }
+        }
+
+        
+        public ObservableCollection<int> omt;
+
+        public ObservableCollection<Task> GetMonitorsTasks(int Mid)
         {
+            IEnumerable<MonitorTask> monitortasklist = new List<MonitorTask>();
+
             using (var client = new HttpClient(handler))
             {
                 client.BaseAddress = new Uri(ServerUrl);
@@ -153,50 +163,56 @@ namespace AirMaintenanceSystemMVVM.Persistency
                     var response = client.GetAsync("api/MonitorTasks").Result;
                     if (response.IsSuccessStatusCode)
                     {
-                        var monitorlist = response.Content.ReadAsAsync<IEnumerable<MonitorTask>>().Result;
+                        monitortasklist = response.Content.ReadAsAsync<IEnumerable<MonitorTask>>().Result.ToList();
 
-                        foreach (var u in monitorlist)
+
+
+                        foreach (var u in monitortasklist)
                         {
-                            if (u.Monitor_ID == id)
-                            omt.Add(u.Task_ID);
+                            if (u.Monitor_ID == Mid)
+                                omt.Add(u.Task_ID);
                         }
-                        return ot;
+                        var tasks = GetTasks();
+                        return tasks;
                     }
+                    
                 }
                 catch (Exception ex)
                 {
                     new MessageDialog(ex.Message).ShowAsync();
                 }
 
-                return null;
+                return null; //return new ObservableCollection<MonitorTask>(monitorlist);
             }
         }
 
-        public ObservableCollection<Task> ot = new ObservableCollection<Task>();
-        public ObservableCollection<Task> GetTasks()
+        public ObservableCollection<int> ot = new ObservableCollection<int>();
+
+        public  ObservableCollection<Task> GetTasks()
         {
             using (var client = new HttpClient(handler))
             {
                 client.BaseAddress = new Uri(ServerUrl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var taskstoreturn = new ObservableCollection<Task>();
                 try
                 {
                     var response = client.GetAsync("api/Tasks").Result;
+
                     if (response.IsSuccessStatusCode)
                     {
                         var tasklist = response.Content.ReadAsAsync<IEnumerable<Task>>().Result;
-
-                        foreach (var u in tasklist)
+                        //ObservableCollection<MonitorTask> m = GetMonitorsTasks(id);
+                        foreach (var i in tasklist)
                         {
-                            foreach (var i in omt)
+                            if (omt.Contains(i.Task_ID))
                             {
-                                if (i == u.Task_ID)
-                                ot.Add(u);
+                                taskstoreturn.Add(i);
                             }
-                            
                         }
-                        return ot;
+                       
                     }
                 }
                 catch (Exception ex)
@@ -204,10 +220,81 @@ namespace AirMaintenanceSystemMVVM.Persistency
                     new MessageDialog(ex.Message).ShowAsync();
                 }
 
-                return null;
+                return taskstoreturn;
+
             }
         }
-    }
-}
-        
 
+        
+        //public ObservableCollection<Task> GetRighTasks(int id)
+        //{
+        //    IEnumerable<MonitorTask> monitorlist = new List<MonitorTask>();
+
+        //    using (var client = new HttpClient(handler))
+        //    {
+        //        client.BaseAddress = new Uri(ServerUrl);
+        //        client.DefaultRequestHeaders.Clear();
+        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //        try
+        //        {
+        //            var response = client.GetAsync("api/MonitorTasks").Result;
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                monitorlist = response.Content.ReadAsAsync<IEnumerable<MonitorTask>>().Result.ToList();
+
+        //                foreach (var mm in monitorlist)
+        //                {
+        //                    if (mm.Monitor_ID == id)
+        //                    {
+        //                        ot.Add(mm.Task_ID);
+        //                    }
+                                                      
+
+        //                }
+                        
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            new MessageDialog(ex.Message).ShowAsync();
+        //        }
+
+        //        return ot; 
+        //    }
+        //}
+
+
+
+        //public  Task  GetSpecificTask(int id)
+        //{
+        //    Task task = new Task();
+        //            using (var client = new HttpClient(handler))
+        //            {
+        //                client.BaseAddress = new Uri(ServerUrl);
+        //                client.DefaultRequestHeaders.Clear();
+        //                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+        //                try
+        //                {
+        //                    var response = client.GetStringAsync("api/Tasks/"+id).Result;
+        //                    task = JsonConvert.DeserializeObject<Task>(response);
+
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    new MessageDialog(ex.Message).ShowAsync();
+        //                }
+        //                return task;
+        //            }
+
+        //        }
+
+
+    }
+   }
+        
+    
+
+
+
+        

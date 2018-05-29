@@ -84,7 +84,7 @@ namespace AirMaintenanceSystemMVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        
         public LogInViewModel()
         {
             LogInHandler = new Handler.LogInHandler(this);

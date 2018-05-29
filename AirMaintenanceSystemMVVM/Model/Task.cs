@@ -16,9 +16,9 @@ namespace AirMaintenanceSystemMVVM.Model
         public string Task_Status { get; set; }
 
         public int User_ID { get; set; }
-
+        public int Monitor_ID { get; set; }
         public Task(int task_id, string task_description, string task_schedule, string task_type, string task_status,
-            int user_id)
+            int user_id,int monitor_id)
         {
             Task_ID = task_id;
             Task_Description = task_description;
@@ -26,6 +26,7 @@ namespace AirMaintenanceSystemMVVM.Model
             Task_Type = task_type;
             Task_Status = task_status;
             User_ID = user_id;
+            Monitor_ID = monitor_id;
 
         }
 

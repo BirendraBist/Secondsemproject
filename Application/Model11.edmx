@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FinalProjectAirMeasurementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Monitors">
+          <Key>
+            <PropertyRef Name="Monitor_ID" />
+          </Key>
+          <Property Name="Monitor_ID" Type="int" Nullable="false" />
+          <Property Name="Monitor_Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Monitor_Type" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Station_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MonitorTasks">
+          <Key>
+            <PropertyRef Name="MonitorTask_ID" />
+          </Key>
+          <Property Name="MonitorTask_ID" Type="int" Nullable="false" />
+          <Property Name="Monitor_ID" Type="int" Nullable="false" />
+          <Property Name="Task_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stations">
+          <Key>
+            <PropertyRef Name="Station_ID" />
+          </Key>
+          <Property Name="Station_ID" Type="int" Nullable="false" />
+          <Property Name="Station_Name" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="Task_ID" />
+          </Key>
+          <Property Name="Task_ID" Type="int" Nullable="false" />
+          <Property Name="Task_Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Task_Schedule" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Task_Type" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Task_Status" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="User_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="User_Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="User_Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="User_Type" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Monitors__Statio__49C3F6B7">
+          <End Role="Stations" Type="Self.Stations" Multiplicity="1" />
+          <End Role="Monitors" Type="Self.Monitors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stations">
+              <PropertyRef Name="Station_ID" />
+            </Principal>
+            <Dependent Role="Monitors">
+              <PropertyRef Name="Station_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MonitorTa__Monit__4CA06362">
+          <End Role="Monitors" Type="Self.Monitors" Multiplicity="1" />
+          <End Role="MonitorTasks" Type="Self.MonitorTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monitors">
+              <PropertyRef Name="Monitor_ID" />
+            </Principal>
+            <Dependent Role="MonitorTasks">
+              <PropertyRef Name="Monitor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MonitorTa__Task___4D94879B">
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="1" />
+          <End Role="MonitorTasks" Type="Self.MonitorTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Task_ID" />
+            </Principal>
+            <Dependent Role="MonitorTasks">
+              <PropertyRef Name="Task_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__User_ID__37A5467C">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinalProjectAirMeasurementSystemModelStoreContainer">
+          <EntitySet Name="Monitors" EntityType="Self.Monitors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonitorTasks" EntityType="Self.MonitorTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stations" EntityType="Self.Stations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Monitors__Statio__49C3F6B7" Association="Self.FK__Monitors__Statio__49C3F6B7">
+            <End Role="Stations" EntitySet="Stations" />
+            <End Role="Monitors" EntitySet="Monitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MonitorTa__Monit__4CA06362" Association="Self.FK__MonitorTa__Monit__4CA06362">
+            <End Role="Monitors" EntitySet="Monitors" />
+            <End Role="MonitorTasks" EntitySet="MonitorTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MonitorTa__Task___4D94879B" Association="Self.FK__MonitorTa__Task___4D94879B">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="MonitorTasks" EntitySet="MonitorTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__User_ID__37A5467C" Association="Self.FK__Tasks__User_ID__37A5467C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FinalProjectAirMeasurementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Monitor">
+          <Key>
+            <PropertyRef Name="Monitor_ID" />
+          </Key>
+          <Property Name="Monitor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Monitor_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Monitor_Type" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Station_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Station" Relationship="Self.FK__Monitors__Statio__49C3F6B7" FromRole="Monitors" ToRole="Stations" />
+          <NavigationProperty Name="MonitorTasks" Relationship="Self.FK__MonitorTa__Monit__4CA06362" FromRole="Monitors" ToRole="MonitorTasks" />
+        </EntityType>
+        <EntityType Name="MonitorTask">
+          <Key>
+            <PropertyRef Name="MonitorTask_ID" />
+          </Key>
+          <Property Name="MonitorTask_ID" Type="Int32" Nullable="false" />
+          <Property Name="Monitor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Task_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Monitor" Relationship="Self.FK__MonitorTa__Monit__4CA06362" FromRole="MonitorTasks" ToRole="Monitors" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__MonitorTa__Task___4D94879B" FromRole="MonitorTasks" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="Station_ID" />
+          </Key>
+          <Property Name="Station_ID" Type="Int32" Nullable="false" />
+          <Property Name="Station_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Monitors" Relationship="Self.FK__Monitors__Statio__49C3F6B7" FromRole="Stations" ToRole="Monitors" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Task_ID" />
+          </Key>
+          <Property Name="Task_ID" Type="Int32" Nullable="false" />
+          <Property Name="Task_Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Task_Schedule" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Task_Type" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Task_Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MonitorTasks" Relationship="Self.FK__MonitorTa__Task___4D94879B" FromRole="Tasks" ToRole="MonitorTasks" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Tasks__User_ID__37A5467C" FromRole="Tasks" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="User_Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Tasks__User_ID__37A5467C" FromRole="Users" ToRole="Tasks" />
+        </EntityType>
+        <Association Name="FK__Monitors__Statio__49C3F6B7">
+          <End Role="Stations" Type="Self.Station" Multiplicity="1" />
+          <End Role="Monitors" Type="Self.Monitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stations">
+              <PropertyRef Name="Station_ID" />
+            </Principal>
+            <Dependent Role="Monitors">
+              <PropertyRef Name="Station_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MonitorTa__Monit__4CA06362">
+          <End Role="Monitors" Type="Self.Monitor" Multiplicity="1" />
+          <End Role="MonitorTasks" Type="Self.MonitorTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monitors">
+              <PropertyRef Name="Monitor_ID" />
+            </Principal>
+            <Dependent Role="MonitorTasks">
+              <PropertyRef Name="Monitor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MonitorTa__Task___4D94879B">
+          <End Role="Tasks" Type="Self.Task" Multiplicity="1" />
+          <End Role="MonitorTasks" Type="Self.MonitorTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="Task_ID" />
+            </Principal>
+            <Dependent Role="MonitorTasks">
+              <PropertyRef Name="Task_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tasks__User_ID__37A5467C">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinalProjectAirMeasurementSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Monitors" EntityType="Self.Monitor" />
+          <EntitySet Name="MonitorTasks" EntityType="Self.MonitorTask" />
+          <EntitySet Name="Stations" EntityType="Self.Station" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Monitors__Statio__49C3F6B7" Association="Self.FK__Monitors__Statio__49C3F6B7">
+            <End Role="Stations" EntitySet="Stations" />
+            <End Role="Monitors" EntitySet="Monitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MonitorTa__Monit__4CA06362" Association="Self.FK__MonitorTa__Monit__4CA06362">
+            <End Role="Monitors" EntitySet="Monitors" />
+            <End Role="MonitorTasks" EntitySet="MonitorTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MonitorTa__Task___4D94879B" Association="Self.FK__MonitorTa__Task___4D94879B">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="MonitorTasks" EntitySet="MonitorTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tasks__User_ID__37A5467C" Association="Self.FK__Tasks__User_ID__37A5467C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FinalProjectAirMeasurementSystemModelStoreContainer" CdmEntityContainer="FinalProjectAirMeasurementSystemEntities">
+          <EntitySetMapping Name="Monitors">
+            <EntityTypeMapping TypeName="FinalProjectAirMeasurementSystemModel.Monitor">
+              <MappingFragment StoreEntitySet="Monitors">
+                <ScalarProperty Name="Monitor_ID" ColumnName="Monitor_ID" />
+                <ScalarProperty Name="Monitor_Name" ColumnName="Monitor_Name" />
+                <ScalarProperty Name="Monitor_Type" ColumnName="Monitor_Type" />
+                <ScalarProperty Name="Station_ID" ColumnName="Station_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonitorTasks">
+            <EntityTypeMapping TypeName="FinalProjectAirMeasurementSystemModel.MonitorTask">
+              <MappingFragment StoreEntitySet="MonitorTasks">
+                <ScalarProperty Name="MonitorTask_ID" ColumnName="MonitorTask_ID" />
+                <ScalarProperty Name="Monitor_ID" ColumnName="Monitor_ID" />
+                <ScalarProperty Name="Task_ID" ColumnName="Task_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stations">
+            <EntityTypeMapping TypeName="FinalProjectAirMeasurementSystemModel.Station">
+              <MappingFragment StoreEntitySet="Stations">
+                <ScalarProperty Name="Station_ID" ColumnName="Station_ID" />
+                <ScalarProperty Name="Station_Name" ColumnName="Station_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="FinalProjectAirMeasurementSystemModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="Task_ID" ColumnName="Task_ID" />
+                <ScalarProperty Name="Task_Description" ColumnName="Task_Description" />
+                <ScalarProperty Name="Task_Schedule" ColumnName="Task_Schedule" />
+                <ScalarProperty Name="Task_Type" ColumnName="Task_Type" />
+                <ScalarProperty Name="Task_Status" ColumnName="Task_Status" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FinalProjectAirMeasurementSystemModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Email" ColumnName="User_Email" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+                <ScalarProperty Name="User_Type" ColumnName="User_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

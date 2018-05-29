@@ -24,9 +24,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Orientation="Vertical">
-            <StackPanel.Background>
-                <ImageBrush ImageSource="ms-appx:///Assets/Air.jpg"/>
-            </StackPanel.Background>
+            
             <StackPanel  Orientation="Horizontal" VerticalAlignment="Center" Margin="0,400,0,0">
                 <TextBlock Text="User Name" Height="50"  TextAlignment="Center" FontWeight="Medium" FontSize="30"/>
                 <TextBox Text="{Binding NewUser.User_Email, Mode=TwoWay}" Height="50" Width="350" Margin="15,0,0,0" FontSize="25"  VerticalContentAlignment="Center" PlaceholderText="Example@Something.com"/>
@@ -34,7 +32,8 @@
             </StackPanel>
             <StackPanel  Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,20,0,0">
                 <TextBlock Text="Password" Height="50"  TextAlignment="Center" FontWeight="Medium" FontSize="30"/>
-                <PasswordBox Password="{Binding NewUser.User_Password,Mode=TwoWay}" Height="50" Width="350" Margin="35,0,0,0" FontSize="25" VerticalContentAlignment="Center" HorizontalAlignment="Right" PlaceholderText="Password"/>
+                <PasswordBox Password="{Binding NewUser.User_Password,Mode=TwoWay}" Height="50" Width="350" Margin="35,0,0,0" FontSize="25" 
+                             VerticalContentAlignment="Center" HorizontalAlignment="Right" PlaceholderText="Password"/>
             </StackPanel>
             <Button Command="{Binding CheckCommand}"  Content="LogIn" HorizontalAlignment="Center" VerticalAlignment="Top"
                 FontWeight="Medium" FontSize="20" Height="55" Width="100" Margin="0,20,0,0"/>
@@ -42,6 +41,6 @@
         <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="5" Background="Aquamarine">
 
         </StackPanel>
-
+       
     </Grid>
 </Page>

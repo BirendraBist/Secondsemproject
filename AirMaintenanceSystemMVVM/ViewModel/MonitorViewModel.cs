@@ -19,9 +19,7 @@ namespace AirMaintenanceSystemMVVM.ViewModel
         private Monitor _selectedMonitor;
         public MonitorCatalog MonitorCatalog { get; set; }
         private ObservableCollection<Monitor> monitors = new ObservableCollection<Monitor>();
-        public TaskCatalog TaskCatalog { get; set; }
-        private ObservableCollection<Task> tasks= new ObservableCollection<Task>();
-       
+        
         //property of Monitor
         private int _monitorID;
         public int Monitor_ID
@@ -56,6 +54,10 @@ namespace AirMaintenanceSystemMVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+        public TaskCatalog TaskCatalog { get; set; }
+        private ObservableCollection<Task> tasks = new ObservableCollection<Task>();
+        private TaskCatalog tc;
+        
         //property of Task
         private int _taskID;
         public int Task_ID
@@ -115,23 +117,16 @@ namespace AirMaintenanceSystemMVVM.ViewModel
             }
 
         }
-        private string _userID;
-        public string User_ID
-        {
-            get { return _userID; }
-            set
-            {
-                _userID = value;
-                OnPropertyChanged();
-            }
-
-        }
+       
         public MonitorViewModel()
         {
             MonitorCatalog = MonitorCatalog.Instance;
             RightMonitors = new ObservableCollection<Monitor>();
+            tc = TaskCatalog.Instance;
             RightMonitors = MonitorCatalog.Monitors;
-           tasks=new ObservableCollection<Task>();
+           
+            //Tasks = new ObservableCollection<Task>();
+            
         }
         
         public ObservableCollection<Monitor> RightMonitors
@@ -150,9 +145,12 @@ namespace AirMaintenanceSystemMVVM.ViewModel
             get { return _selectedMonitor; }
             set
             {
+                //tc.getSpecificTasks(SelectedMonitor.Monitor_ID);
                 _selectedMonitor = value;
-                new PersistencyFadace().GetMonitorsTasks(SelectedMonitor.Monitor_ID);
-               Tasks = (new PersistencyFadace().GetTasks());
+                Tasks = new PersistencyFadace().GetMonitorsTasks(SelectedMonitor.Monitor_ID);
+               //Tasks=tc.GetSpecificTasks(SelectedMonitor.Monitor_ID); 
+                
+             //Tasks = (new PersistencyFadace().GetTasks(SelectedMonitor.Monitor_ID));
                 OnPropertyChanged(nameof(SelectedMonitor));
             }
         }

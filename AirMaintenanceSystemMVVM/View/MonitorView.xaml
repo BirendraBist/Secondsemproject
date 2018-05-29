@@ -36,9 +36,9 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="ID" FontWeight="Bold" FontSize="19" Foreground="Black"/>
-                            <TextBlock Text="Name" FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="Type" FontWeight="Bold" FontSize="19" Foreground="Black" />
+                            <TextBlock Text="Monitor ID" FontWeight="Bold" FontSize="19" Foreground="Black"/>
+                            <TextBlock Text="Monitor Name" FontWeight="Bold" FontSize="19" Foreground="Black" />
+                            <TextBlock Text="Monitor Type" FontWeight="Bold" FontSize="19" Foreground="Black" />
                             <TextBlock Text="Station ID" FontWeight="Bold" FontSize="19" Foreground="Black" />
 
 
@@ -48,29 +48,25 @@
                             <TextBlock Text="{Binding Monitor_Name}"   FontWeight="Bold" FontSize="19" Foreground="Black" />
                             <TextBlock Text="{Binding Monitor_Type}"   FontWeight="Bold" FontSize="19" Foreground="Black" />
                             <TextBlock Text="{Binding Station_ID}"   FontWeight="Bold" FontSize="19" Foreground="Black" />
-
-                        </StackPanel>
+                       </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <!--Back button-->
-        <Button Grid.Column="0" Grid.Row="0" Content="Back" HorizontalAlignment="Left" Margin="10,14,0,0"
-         Height="50" Width="80" Click="ButtonBase_OnClick" VerticalAlignment="Top" />
+        
         <!--List view of task-->
         <ListView  Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" 
-                 ItemsSource="{Binding TaskCatalog.Tasks}" >
+                 ItemsSource="{Binding Tasks, Mode=TwoWay}" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="ID" FontWeight="Bold" FontSize="19" Foreground="Black"/>
-                            <TextBlock Text="Description" FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="Schedule" FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="Status" FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="Type" FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="MonitorID" FontWeight="Bold" FontSize="19" Foreground="Black" />
+                            <TextBlock Text="Task ID" FontWeight="Bold" FontSize="19" Foreground="Black"/>
+                            <TextBlock Text="Task Description" FontWeight="Bold" FontSize="19" Foreground="Black" />
+                            <TextBlock Text="Task Schedule" FontWeight="Bold" FontSize="19" Foreground="Black" />
+                            <TextBlock Text="Task Status" FontWeight="Bold" FontSize="19" Foreground="Black" />
+                            <TextBlock Text="Task Type" FontWeight="Bold" FontSize="19" Foreground="Black" />
 
                         </StackPanel>
                         <StackPanel  Margin="12,0,0,0">
@@ -79,14 +75,14 @@
                             <TextBlock Text="{Binding Task_Schedule}"   FontWeight="Bold" FontSize="19" Foreground="Black" />
                             <TextBlock Text="{Binding Task_Status}"  FontWeight="Bold" FontSize="19" Foreground="Black" />
                             <TextBlock Text="{Binding Task_Type}"   FontWeight="Bold" FontSize="19" Foreground="Black" />
-                            <TextBlock Text="{Binding }"  FontWeight="Bold" FontSize="19" Foreground="Black" />
 
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
+        <Button Grid.Column="3" Grid.Row="2" Height="55" Width="90" Content="Select" VerticalAlignment="Bottom" Margin="5,0,0,10" Click="ButtonBase_OnClick"/>
 
+         
     </Grid>
 </Page>
